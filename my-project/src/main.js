@@ -1,11 +1,12 @@
 import Vue from 'vue'
 // import App from './App.vue'
-import myApp from './myApp.vue'
+import myApp1 from './components/myApp1.vue'
 import VueResource from 'vue-resource'
-// Vue.use(VueHighcharts);
+
+
 Vue.use(VueResource);
 
 new Vue({
-  el: '#myApp',
-  render: h => h(myApp)
+    el: '#myApp1',
+    render: h => h(myApp1)
 })

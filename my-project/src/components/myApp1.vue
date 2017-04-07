@@ -2,7 +2,7 @@
     <div class="container well" id="starApp">
         <h1>Star Wars DB</h1>
         <p>Get a Star Wars Character</p>
-        <hr/>
+        <hr>
         <select class="widthSelect" v-model="character1">
             <option v-for="person in characters" v-bind:value="person">
                 {{person.name}}
@@ -30,12 +30,14 @@
 </template>
 <!-- ////////////////// -->
 <style scoped>
-    
+    .widthSelect {
+        width: 150px;
+    }
 </style>
 <!-- ////////////////// -->
 <script>
 export default {
-        name: "starApp",
+        name: "star-app",
         props: [],
         data() {
             return {
@@ -52,20 +54,16 @@ export default {
             }
         },
         created: function() {
-            this.getCharacters();
+            // this.getCharacters();
+            this.getStarWarCharacters();
         },
         methods: {
-            getCharacters: function() {
-                var xhr = new XMLHttpRequest();
-                var self = this;
-                xhr.open('GET', 'http://swapi.co/api/people/?format=json');
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.onload = function() {
-                    var data = JSON.parse(xhr.responseText);
-                    // console.log(data);
-                    self.characters = data.results;
-                }
-                xhr.send();
+            getStarWarCharacters: function() {
+                var her = this;
+                this.$http.get('http://swapi.co/api/people/?format=json').then(function(res) {
+                    console.log(res);
+                    her.characters = res.body.results
+                })
             }
         }
     }
